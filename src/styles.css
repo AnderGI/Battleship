@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --darkGrey: #414141;
+    --lightGrey: #545454;
+    --darkBrown: #1d1d1d;
+    --whiteBrwon: #4e3027;
+    --smoothWhite1: #c5c6c6;
+    --smoothWhite2: #ecf0f1;
+    --black: #060606;
+    --blue: #3297db;
+    --red: #e84c3d;
+    --metalGrey: #2c3f50;
+  }
+  
+  header > div.ship {
+    display: none;
+  }
+  
+  header > div.fight {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.125em;
+    padding: 0.25em 2em;
+  
+  }
+  header > div.fight > div {
+    flex-grow: 1;
+    height: 70%;
+    background-color: var(--whiteBrwon);
+  }
+  header > div.fight > div:nth-child(2n + 1) {
+    flex-grow: 2;
+  }
+  header > div.fight > div.img {
+    border-radius: 50px;
+    width: 100px;
+    height: 75px;
+    position: absolute;
+    background-color: var(--blue);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  header > div.fight>div:first-child>div{
+      height: 100%;
+      background: url("./images/uncle-sam.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+  }
+  header > div.fight>div:last-child>div{
+      height: 100%;
+      background: url("./images/ai.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+  }
+  header > div.fight > div.img > div {
+    width: 90%;
+    height: 90%;
+    background: url("./images/versus.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  
+  body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--blue);
+    display: grid;
+    grid-template-rows: 15vh 75vh 10vh;
+  }
+  
+  main{
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0.2em 1em;
+      column-gap: 0.5em;
+  }
+  
+  main>section{
+      background-color: var(--smoothWhite1);
+      display: grid;
+      grid-template-columns: repeat(10,1fr);
+      grid-template-rows: repeat(10,1fr);
+  }
+  
+  main>section>div{
+      border: 1px solid black;
+  }
+  
+  footer {
+    display: grid;
+    justify-items: center;
+    padding: 0.5em 0.2em;
+  }
+  
+  button.footerBtn {
+    font-family: monospace;
+    letter-spacing: 0.0625em;
+    font-weight: 900;
+    font-size: 2em;
+    padding: 0.25em 2em;
+    border-radius: 10px;
+    border: none !important;
+    background-color: var(--smoothWhite2);
+    color: var(--red);
+    text-transform: lowercase;
+    box-shadow: 0em 0em 0.1em 0.02em var(--smoothWhite2);
+    transition: box-shadow ease-in-out 50ms;
+  }
+  
+  button.footerBtn:hover {
+    box-shadow: 0em 0em 0.1em 0.05em var(--smoothWhite2);
+  }
+  
