@@ -1,2 +1,5 @@
+/* eslint-disable no-undef */
 import "./styles.css";
-console.log("Hola");
+const Ship = require("./ship/ship")
+const ship = new Ship(5, false);
+console.log(ship);
