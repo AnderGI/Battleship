@@ -6,16 +6,14 @@ const ships = {
   Destroyer: 3,
   "Patrol Boat": 2,
 };
-let shipNameIndex = 0;
 const shipNameBtn = document.querySelector("button.shipName");
-
+const shipsArray = Object.entries(ships);
 const displayShipNameInBtn = () => {
   shipNameBtn.addEventListener("click", () => {
-    const shipsArray = Object.entries(ships);
-    if (shipNameIndex >= shipsArray.length) shipNameIndex = 0;
-    const text = shipsArray[shipNameIndex][0];
+    const first = shipsArray.shift();
+    const text = first[0];
     shipNameBtn.textContent = text;
-    shipNameIndex++;
+    shipsArray.push(first);
   });
 };
 

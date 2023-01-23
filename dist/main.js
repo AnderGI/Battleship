@@ -130,13 +130,23 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/UI_Modules/alignementTextInBtn.js":
+/*!***********************************************!*\
+  !*** ./src/UI_Modules/alignementTextInBtn.js ***!
+  \***********************************************/
+/***/ ((module) => {
+
+eval("const positionBtn = document.querySelector(\"button.positionBtn\");\r\nconst alignementArray = [\"Vertical\", \"Horizontal\"];\r\n\r\n\r\nconst alignementTextInBtn = () => {\r\n    positionBtn.addEventListener('click', () => {\r\n        const first = alignementArray.shift();\r\n        positionBtn.textContent = first;\r\n        alignementArray.push(first)\r\n    })\r\n}\r\n\r\n// eslint-disable-next-line no-undef\r\nmodule.exports = alignementTextInBtn;\n\n//# sourceURL=webpack://battleship/./src/UI_Modules/alignementTextInBtn.js?");
+
+/***/ }),
+
 /***/ "./src/UI_Modules/displayShipNameInBtn.js":
 /*!************************************************!*\
   !*** ./src/UI_Modules/displayShipNameInBtn.js ***!
   \************************************************/
 /***/ ((module) => {
 
-eval("//relate name with its length\r\nconst ships = {\r\n  Cruise: 5,\r\n  Battleship: 4,\r\n  Submarine: 3,\r\n  Destroyer: 3,\r\n  \"Patrol Boat\": 2,\r\n};\r\nlet shipNameIndex = 0;\r\nconst shipNameBtn = document.querySelector(\"button.shipName\");\r\n\r\nconst displayShipNameInBtn = () => {\r\n  shipNameBtn.addEventListener(\"click\", () => {\r\n    const shipsArray = Object.entries(ships);\r\n    if (shipNameIndex >= shipsArray.length) shipNameIndex = 0;\r\n    const text = shipsArray[shipNameIndex][0];\r\n    shipNameBtn.textContent = text;\r\n    shipNameIndex++;\r\n  });\r\n};\r\n\r\n// eslint-disable-next-line no-undef\r\nmodule.exports = displayShipNameInBtn;\r\n\n\n//# sourceURL=webpack://battleship/./src/UI_Modules/displayShipNameInBtn.js?");
+eval("//relate name with its length\r\nconst ships = {\r\n  Cruise: 5,\r\n  Battleship: 4,\r\n  Submarine: 3,\r\n  Destroyer: 3,\r\n  \"Patrol Boat\": 2,\r\n};\r\nconst shipNameBtn = document.querySelector(\"button.shipName\");\r\nconst shipsArray = Object.entries(ships);\r\nconst displayShipNameInBtn = () => {\r\n  shipNameBtn.addEventListener(\"click\", () => {\r\n    const first = shipsArray.shift();\r\n    const text = first[0];\r\n    shipNameBtn.textContent = text;\r\n    shipsArray.push(first);\r\n  });\r\n};\r\n\r\n// eslint-disable-next-line no-undef\r\nmodule.exports = displayShipNameInBtn;\r\n\n\n//# sourceURL=webpack://battleship/./src/UI_Modules/displayShipNameInBtn.js?");
 
 /***/ }),
 
@@ -147,7 +157,7 @@ eval("//relate name with its length\r\nconst ships = {\r\n  Cruise: 5,\r\n  Batt
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* eslint-disable no-undef */\r\n\r\n\r\n(function () {\r\n  const displayShipNameInBtn = __webpack_require__(/*! ./UI_Modules/displayShipNameInBtn */ \"./src/UI_Modules/displayShipNameInBtn.js\");\r\n  displayShipNameInBtn();\r\n})();\r\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* eslint-disable no-undef */\r\n\r\n\r\n(function () {\r\n  const displayShipNameInBtn = __webpack_require__(/*! ./UI_Modules/displayShipNameInBtn */ \"./src/UI_Modules/displayShipNameInBtn.js\");\r\n  displayShipNameInBtn();\r\n\r\n  const alignementTextInBtn = __webpack_require__(/*! ./UI_Modules/alignementTextInBtn */ \"./src/UI_Modules/alignementTextInBtn.js\");\r\n  alignementTextInBtn();\r\n})();\r\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
 
 /***/ }),
 
