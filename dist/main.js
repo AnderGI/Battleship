@@ -140,6 +140,16 @@ eval("const positionBtn = document.querySelector(\"button.positionBtn\");\r\ncon
 
 /***/ }),
 
+/***/ "./src/UI_Modules/displayGameboards.js":
+/*!*********************************************!*\
+  !*** ./src/UI_Modules/displayGameboards.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+eval("const displayGameboards = (arrayOfArrays, el, cellClass) => {\r\n    for(let i = 0; i < arrayOfArrays.length; i++){\r\n        for(let j = 0; j < arrayOfArrays[i].length; j++){\r\n            const div = document.createElement(\"div\");\r\n            div.setAttribute(\"class\", cellClass);\r\n            el.append(div);\r\n        }\r\n    }\r\n}\r\n\r\n// eslint-disable-next-line no-undef\r\nmodule.exports = displayGameboards;\n\n//# sourceURL=webpack://battleship/./src/UI_Modules/displayGameboards.js?");
+
+/***/ }),
+
 /***/ "./src/UI_Modules/displayShipNameInBtn.js":
 /*!************************************************!*\
   !*** ./src/UI_Modules/displayShipNameInBtn.js ***!
@@ -150,6 +160,16 @@ eval("//relate name with its length\r\nconst ships = {\r\n  Cruise: 5,\r\n  Batt
 
 /***/ }),
 
+/***/ "./src/gameboard/gameBoard.js":
+/*!************************************!*\
+  !*** ./src/gameboard/gameBoard.js ***!
+  \************************************/
+/***/ ((module) => {
+
+eval("\r\nclass GameBoard {\r\n  constructor() {\r\n    this.table = [\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],\r\n    ];\r\n    this.ships = [\r\n\r\n    ];\r\n    this.shipCoord = new Set();\r\n    this.missedShots = [\r\n\r\n    ];\r\n  }\r\n\r\n  placeShip(_row, _col, _ship) {\r\n    if (_row > 10 || _col > 10) return false;\r\n    //calc the space available taking into accout ship length and its\r\n    //startin position (from left to right when horizontal and from top to\r\n    //bottom when vertical)\r\n    let availableSpace;\r\n    if (_ship.vertical) {\r\n      //ship is vertical\r\n      availableSpace = 10 - (_row - 1); //the user will not introduce the index\r\n      if (availableSpace < _ship.length) return false; //not enought space\r\n      \r\n    } else {\r\n      //ship is horizontal\r\n      availableSpace = 10 - (_col - 1);\r\n      if (availableSpace < _ship.length) return false; //not enought space\r\n    }\r\n\r\n    const coordinates = [];\r\n    //all posible coordinates\r\n    for(let i = 0; i < _ship.length; i++){\r\n        if(_ship.vertical){\r\n            coordinates.push([(_row - 1) + i, (_col - 1)]);\r\n        }else{\r\n            coordinates.push([(_row - 1), (_col - 1) + i]);\r\n        }\r\n    }\r\n\r\n  \r\n    let possibleShip = true;\r\n      coordinates.forEach(el => {\r\n        const [row, col] = el;\r\n        if(this.shipCoord.has(`${row}, ${col}`)) possibleShip = false;\r\n      })      \r\n    \r\n\r\n    if(possibleShip === true){\r\n      coordinates.forEach(el => {\r\n        const [r, c] = el;\r\n        this.shipCoord.add(`${r}, ${c}`);\r\n        this.table[r][c] = _ship.name.charAt(0);\r\n        _ship.coordinates.add(`${r}, ${c}`);\r\n      })      \r\n      this.ships.push(_ship);\r\n    }\r\n\r\n    \r\n  }\r\n\r\n  receiveAttack(_row, _col) {\r\n    if(_row > 10 || _col > 10) return false;\r\n    const rowIndex = _row - 1;\r\n    const colIndex = _col - 1;\r\n    const el = [rowIndex, colIndex];\r\n  \r\n    //if shipCoordinates does not have the el add it to missedShots cause \r\n    //no ship occupies that coord\r\n    if(!this.shipCoord.has(`${rowIndex}, ${colIndex}`)){\r\n      this.missedShots.push(el);  \r\n      this.table[rowIndex][colIndex] = \"*\";\r\n      return \"*\";\r\n    }else{\r\n      //if shipCoord has it\r\n      //look for every ship\r\n      //evaluate if coordinates of ship has el coordinates\r\n      //in that case ship has been hitted\r\n      for(const ship of this.ships){\r\n        if(ship.coordinates.has(`${rowIndex}, ${colIndex}`)){\r\n          ship.hit();\r\n          this.table[rowIndex][colIndex] = \"X\";\r\n          ship.isSunk();\r\n          if(ship.sunk) return \"Sunk\";\r\n          return \"X\";\r\n        }\r\n      }\r\n    }\r\n\r\n  }\r\n}\r\n\r\n// eslint-disable-next-line no-undef\r\nmodule.exports = GameBoard;\n\n//# sourceURL=webpack://battleship/./src/gameboard/gameBoard.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -157,7 +177,7 @@ eval("//relate name with its length\r\nconst ships = {\r\n  Cruise: 5,\r\n  Batt
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* eslint-disable no-undef */\r\n\r\n\r\n(function () {\r\n  const displayShipNameInBtn = __webpack_require__(/*! ./UI_Modules/displayShipNameInBtn */ \"./src/UI_Modules/displayShipNameInBtn.js\");\r\n  displayShipNameInBtn();\r\n\r\n  const alignementTextInBtn = __webpack_require__(/*! ./UI_Modules/alignementTextInBtn */ \"./src/UI_Modules/alignementTextInBtn.js\");\r\n  alignementTextInBtn();\r\n})();\r\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* eslint-disable no-undef */\r\n\r\n\r\n(function () {\r\n  const Gameboard = __webpack_require__(/*! ./gameboard/gameBoard */ \"./src/gameboard/gameBoard.js\");\r\n  const userSection = document.querySelector(\"section#userGameboard\");\r\n  const computerSection = document.querySelector(\"section#computerGameboard\");\r\n  const userGameboard = new Gameboard();\r\n  const computerGameboard = new Gameboard();\r\n  const displayShipNameInBtn = __webpack_require__(/*! ./UI_Modules/displayShipNameInBtn */ \"./src/UI_Modules/displayShipNameInBtn.js\");\r\n  displayShipNameInBtn();\r\n\r\n  const alignementTextInBtn = __webpack_require__(/*! ./UI_Modules/alignementTextInBtn */ \"./src/UI_Modules/alignementTextInBtn.js\");\r\n  alignementTextInBtn();\r\n\r\n  const displayGameboards = __webpack_require__(/*! ./UI_Modules/displayGameboards */ \"./src/UI_Modules/displayGameboards.js\");\r\n  displayGameboards(userGameboard.table, userSection, \"userGbCell\");\r\n  displayGameboards(computerGameboard.table, computerSection, \"computerGbCell\");\r\n})();\r\n\n\n//# sourceURL=webpack://battleship/./src/index.js?");
 
 /***/ }),
 
