@@ -3,10 +3,10 @@ const Gameboard = require("../gameboard/gameBoard");
 const Ship = require("../ship/ship");
 
 const game = new Gameboard();
-const ship1 = new Ship(5, false);
+const ship1 = new Ship(5, false, "Ship 1");
 game.placeShip(4, 2, ship1);
 
-const ship2 = new Ship(5, true);
+const ship2 = new Ship(5, true, "Ship 2");
 game.placeShip(2, 8, ship2);
 
 test('Incorrect coordinates', () => {
@@ -18,9 +18,9 @@ test('Incorrect coordinates', () => {
 
 
 test('Correct coordinates but no hit', () => {
-    expect(game.receiveAttack(10,2)).toBe("Missed"); //indexOf(coord) === -1
-    expect(game.receiveAttack(5,3)).toBe("Missed");
-    expect(game.receiveAttack(3,4)).toBe("Missed");
+    expect(game.receiveAttack(10,2)).toBe("*"); //indexOf(coord) === -1
+    expect(game.receiveAttack(5,3)).toBe("*");
+    expect(game.receiveAttack(3,4)).toBe("*");
 })
 
 test('Correct coordinates and hit', () => {
@@ -32,46 +32,46 @@ test('Correct coordinates and hit', () => {
 test('New gameboard layout with ships, hits and missed shots', () => {
     const game2 = new Gameboard();
 
-    const carrier = new Ship(5, false);
+    const carrier = new Ship(5, false, "Carrier");
     game2.placeShip(4,2,carrier);
 
-    const battleship = new Ship(4, true);
+    const battleship = new Ship(4, true, "Battleship");
     game2.placeShip(2,8,battleship);
 
-    const destroyer = new Ship(3, false);
+    const destroyer = new Ship(3, false, "Destroyer");
     game2.placeShip(7,5,destroyer);
 
-    const submarine = new Ship(3, true);
+    const submarine = new Ship(3, true, "Submarine");
     game2.placeShip(5,10,submarine);
 
-    const patrolBoat = new Ship(2, false);
+    const patrolBoat = new Ship(2, false, "Patrol Boat");
     game2.placeShip(1,3,patrolBoat);
 
     //the begining and end of each ship
     //carrier
-    expect(game2.table[3][1]).toBe("S");
-    expect(game2.table[3][5]).toBe("S");
+    expect(game2.table[3][1]).toBe("C");
+    expect(game2.table[3][5]).toBe("C");
     //battleship
-    expect(game2.table[1][7]).toBe("S");
-    expect(game2.table[4][7]).toBe("S");
+    expect(game2.table[1][7]).toBe("B");
+    expect(game2.table[4][7]).toBe("B");
     //submarine
     expect(game2.table[4][9]).toBe("S");
     expect(game2.table[6][9]).toBe("S");
     //destroyer
-    expect(game2.table[6][4]).toBe("S");
-    expect(game2.table[6][6]).toBe("S");
+    expect(game2.table[6][4]).toBe("D");
+    expect(game2.table[6][6]).toBe("D");
     //patrol boat
-    expect(game2.table[0][2]).toBe("S");
-    expect(game2.table[0][3]).toBe("S");
+    expect(game2.table[0][2]).toBe("P");
+    expect(game2.table[0][3]).toBe("P");
 
     //boat that tries to fill occupied space
-    const badShip = new Ship(5, false);
+    const badShip = new Ship(5, false, "Not good Ship");
     game2.placeShip(3, 5, badShip);
 
-    expect(game2.table[2][4]).not.toBe("S");
-    expect(game2.table[2][5]).not.toBe("S");
-    expect(game2.table[2][6]).not.toBe("S");
-    expect(game2.table[2][8]).not.toBe("S");
+    expect(game2.table[2][4]).not.toBe("N");
+    expect(game2.table[2][5]).not.toBe("N");
+    expect(game2.table[2][6]).not.toBe("N");
+    expect(game2.table[2][8]).not.toBe("N");
 
     //attacks to different ships
     //battleship

@@ -1,11 +1,12 @@
 
 class Ship{
-    constructor(_length, _verticalPosition){
+    constructor(_length, _verticalPosition, _name){
         this.length = _length;
         this.vertical = _verticalPosition;
         this.timesHitted = 0;
         this.sunk = false;
         this.coordinates = new Set();
+        this.name = _name;
     }
 
     hit(){

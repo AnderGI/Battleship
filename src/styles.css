@@ -88,23 +88,30 @@
   }
   
   main>section{
-      background-color: var(--smoothWhite1);
       display: grid;
       grid-template-columns: repeat(10,1fr);
       grid-template-rows: repeat(10,1fr);
   }
   
   main>section>div{
-      border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--blue);
   }
-  
+  main>section>div:nth-child(10n+10){
+   border-right:none;
+  }
+  main>section>div:nth-child(10n + 1){
+    border-left: none;
+  }
   footer {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
     justify-items: center;
     padding: 0.5em 0.2em;
   }
   
-  button.footerBtn {
+  button {
     font-family: monospace;
     letter-spacing: 0.0625em;
     font-weight: 900;
@@ -119,7 +126,7 @@
     transition: box-shadow ease-in-out 50ms;
   }
   
-  button.footerBtn:hover {
+  button:hover {
     box-shadow: 0em 0em 0.1em 0.05em var(--smoothWhite2);
   }
   

@@ -61,7 +61,7 @@ class GameBoard {
       coordinates.forEach(el => {
         const [r, c] = el;
         this.shipCoord.add(`${r}, ${c}`);
-        this.table[r][c] = "S";
+        this.table[r][c] = _ship.name.charAt(0);
         _ship.coordinates.add(`${r}, ${c}`);
       })      
       this.ships.push(_ship);
@@ -81,7 +81,7 @@ class GameBoard {
     if(!this.shipCoord.has(`${rowIndex}, ${colIndex}`)){
       this.missedShots.push(el);  
       this.table[rowIndex][colIndex] = "*";
-      return "Missed";
+      return "*";
     }else{
       //if shipCoord has it
       //look for every ship
@@ -93,6 +93,7 @@ class GameBoard {
           this.table[rowIndex][colIndex] = "X";
           ship.isSunk();
           if(ship.sunk) return "Sunk";
+          return "X";
         }
       }
     }
