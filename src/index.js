@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import "./styles.css";
 
-(function(){
-  
-
+(function () {
+  const displayShipNameInBtn = require("./UI_Modules/displayShipNameInBtn");
+  displayShipNameInBtn();
 })();
