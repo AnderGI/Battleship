@@ -44,15 +44,27 @@ import "./styles.css";
       const ship = new Ship(obj.length, vertical, obj.name);
       */
       const cellIndex = userCells.indexOf(cell);
+      const visualShipPlacement = require("./UI_Modules/correctVisualShipPlacement");
+      let goodPositioning = visualShipPlacement(cellIndex, obj);
       if (obj.alignement === "Horizontal") {
         for (let i = 0; i < obj.length; i++) {
-          userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+          if(goodPositioning){
+            userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+          }else{
+            userCells[cellIndex + i].style.backgroundColor = "red";
+          }
+          
         }
       }
 
       if (obj.alignement === "Vertical") {
         for (let i = 0; i < obj.length * 10; i += 10) {
-          userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+          if(goodPositioning){
+            userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+          }else{
+            userCells[cellIndex + i].style.backgroundColor = "red";
+          }
+          
         }
       }
     }
