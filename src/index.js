@@ -23,59 +23,11 @@ import "./styles.css";
   const shipNameBtn = document.querySelector("button.shipName");
   const userCells = [...document.querySelectorAll("div.userGbCell")];
  
-  const shipValuesNameLength = (elementTextContent) => {
-    let shipNameAndLength = null;
-    switch(elementTextContent){
-      case "Cruise":
-        shipNameAndLength = {
-          name:"Cruise",
-          length: 5,
-        }
-        break;
-      case "Battleship":
-        shipNameAndLength = {
-          name:"Battleship",
-          length: 4,
-        }
-        break;
-      case "Destroyer":
-        shipNameAndLength = {
-          name:"Destroyer",
-          length: 3,
-        }
-        break;
-      case "Submarine":
-        shipNameAndLength = {
-          name:"Submarine",
-          length: 3,
-        }
-        break;
-      case "Patrol Boat":
-        shipNameAndLength = {
-          name:"Patrol Boat",
-          length: 2,
-        }
-        break;
-    }
-
-    return shipNameAndLength;
-  }
-  const shipValuesAlignement = (elementTextContent) => {
-    let obj = null;
-    switch (elementTextContent){
-      case "Vertical":
-        obj = {
-          alignement: "Vertical"
-        }
-        break;
-      case "Horizontal":
-        obj = {
-          alignement: "Horizontal"
-        }
-        break;
-    }
-    return obj;
-  }
+  //Ship name button and its corresponding length
+  const shipValuesNameLength = require("./UI_Modules/shipValuesNameLength");
+  //Alignement text content button
+  const shipValuesAlignement = require('./UI_Modules/shipValuesAlignement');
+  
   const displayShipShadow = () => {
     const shipBtnText = shipNameBtn.textContent;
     const positionBtnText = positionBtn.textContent;
