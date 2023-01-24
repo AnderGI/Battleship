@@ -48,29 +48,58 @@ import "./styles.css";
       let goodPositioning = visualShipPlacement(cellIndex, obj);
       if (obj.alignement === "Horizontal") {
         for (let i = 0; i < obj.length; i++) {
-          if(goodPositioning){
-            userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-          }else{
+          if (goodPositioning) {
+            userCells[cellIndex + i].style.backgroundColor =
+              "rgba(0, 0, 0, 0.5)";
+          } else {
             userCells[cellIndex + i].style.backgroundColor = "red";
           }
-          
         }
       }
 
       if (obj.alignement === "Vertical") {
         for (let i = 0; i < obj.length * 10; i += 10) {
-          if(goodPositioning){
-            userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-          }else{
+          if (goodPositioning) {
+            userCells[cellIndex + i].style.backgroundColor =
+              "rgba(0, 0, 0, 0.5)";
+          } else {
             userCells[cellIndex + i].style.backgroundColor = "red";
           }
-          
         }
       }
     }
   };
+  const removeShipShadow = (e) => {
+    const shipBtnText = shipNameBtn.textContent;
+    const positionBtnText = positionBtn.textContent;
+    const cell = e.target;
+    if (shipBtnText !== "Place Ship" && positionBtnText !== "Alignement") {
+      //cRepeated Code
+      const objNameAndLenght = shipValuesNameLength(shipBtnText);
+      const objAlignement = shipValuesAlignement(positionBtnText);
+      //object with name, length and alignement
+      const obj = { ...objNameAndLenght, ...objAlignement };
+      const cellIndex = userCells.indexOf(cell);
 
+      if (obj.alignement === "Horizontal") {
+        for (let i = 0; i < obj.length; i++) {
+          userCells[cellIndex + i].style.backgroundColor =
+            "rgba(0, 0, 0, 0.15)";
+        }
+      }
+
+      if (obj.alignement === "Vertical") {
+        for (let i = 0; i < obj.length * 10; i += 10) {
+          userCells[cellIndex + i].style.backgroundColor =
+            "rgba(0, 0, 0, 0.15)";
+        }
+      }
+    }
+  };
   userCells.forEach((cell) =>
     cell.addEventListener("mouseover", displayShipShadow)
   );
+  userCells.forEach((cell) =>
+  cell.addEventListener("mouseout", removeShipShadow)
+);
 })();
