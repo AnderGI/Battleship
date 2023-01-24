@@ -2,6 +2,7 @@
 import "./styles.css";
 
 (function () {
+  const Ship = require("./ship/ship");
   const Gameboard = require("./gameboard/gameBoard");
   const userSection = document.querySelector("section#userGameboard");
   const computerSection = document.querySelector("section#computerGameboard");
@@ -22,24 +23,42 @@ import "./styles.css";
   const positionBtn = document.querySelector("button.positionBtn");
   const shipNameBtn = document.querySelector("button.shipName");
   const userCells = [...document.querySelectorAll("div.userGbCell")];
- 
+
   //Ship name button and its corresponding length
   const shipValuesNameLength = require("./UI_Modules/shipValuesNameLength");
   //Alignement text content button
-  const shipValuesAlignement = require('./UI_Modules/shipValuesAlignement');
-  
-  const displayShipShadow = () => {
+  const shipValuesAlignement = require("./UI_Modules/shipValuesAlignement");
+
+  const displayShipShadow = (e) => {
     const shipBtnText = shipNameBtn.textContent;
     const positionBtnText = positionBtn.textContent;
-   // const cell = e.target;
-    if(shipBtnText !== "Place Ship" && positionBtnText !== "Alignement"){
+    const cell = e.target;
+    if (shipBtnText !== "Place Ship" && positionBtnText !== "Alignement") {
       //cell.style.backgroundColor = "white";
       const objNameAndLenght = shipValuesNameLength(shipBtnText);
       const objAlignement = shipValuesAlignement(positionBtnText);
-      const obj = {...objNameAndLenght, ...objAlignement};
-      console.log(obj);
-    }
-  }
+      //object with name, length and alignement
+      const obj = { ...objNameAndLenght, ...objAlignement };
+      /* When cell is clicked a ship will be created and it will be placed in userGameboard and new gameboard will be rendered
+      const vertical = obj.alignement === "Vertical";
+      const ship = new Ship(obj.length, vertical, obj.name);
+      */
+      const cellIndex = userCells.indexOf(cell);
+      if (obj.alignement === "Horizontal") {
+        for (let i = 0; i < obj.length; i++) {
+          userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        }
+      }
 
-  userCells.forEach(cell => cell.addEventListener('click',displayShipShadow))
+      if (obj.alignement === "Vertical") {
+        for (let i = 0; i < obj.length * 10; i += 10) {
+          userCells[cellIndex + i].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        }
+      }
+    }
+  };
+
+  userCells.forEach((cell) =>
+    cell.addEventListener("mouseover", displayShipShadow)
+  );
 })();
