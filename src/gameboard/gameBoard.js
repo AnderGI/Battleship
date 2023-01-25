@@ -53,7 +53,10 @@ class GameBoard {
     let possibleShip = true;
       coordinates.forEach(el => {
         const [row, col] = el;
-        if(this.shipCoord.has(`${row}, ${col}`)) possibleShip = false;
+        if(this.shipCoord.has(`${row}, ${col}`)) {
+          possibleShip = false
+          return false;
+        };
       })      
     
 
