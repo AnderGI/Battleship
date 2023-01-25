@@ -30,10 +30,7 @@ const displayShipShadow = (e) => {
             userCells[cellIndex + i].style.backgroundColor =
               "rgba(0, 0, 0, 0.5)";
           } else {
-            if(cellIndex + i <= 99){
-                userCells[cellIndex + i].style.backgroundColor = "red";
-                cell.style.cursor = "not-allowed";
-            }
+                cell.style.pointerEvents = "none";
           }
         }
       }
@@ -45,8 +42,7 @@ const displayShipShadow = (e) => {
               "rgba(0, 0, 0, 0.5)";
           } else {
             if (cellIndex + i <= 100) {
-              userCells[cellIndex + i].style.backgroundColor = "red";
-              cell.style.cursor = "not-allowed";
+              cell.style.pointerEvents = "none";
             }
           }
         }
