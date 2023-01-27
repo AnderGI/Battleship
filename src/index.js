@@ -28,6 +28,8 @@ import "./styles.css";
 
   const shipValuesNameLength = require("./UI_Modules/shipValuesNameLength");
   const shipValuesAlignement = require("./UI_Modules/shipValuesAlignement");
+  
+  const getShipCoordinates = require("./UI_Modules/getShipCoordinates");
   const displayShip = (e) => {
     const cell = e.target;
     const shipBtnText = shipNameBtn.textContent;
@@ -35,8 +37,12 @@ import "./styles.css";
     const objNameAndLenght = shipValuesNameLength(shipBtnText);
     const objAlignement = shipValuesAlignement(positionBtnText);
     const obj = { ...objNameAndLenght, ...objAlignement };
-    alert(`${obj.name}, ${obj.length}, ${obj.alignement}, ${userCells.indexOf(cell)}`)
+    const ship = new Ship(obj.length, obj.alignement, obj.name);
+    const shipCoordinates = getShipCoordinates(userCells.indexOf(cell));
+    userGameboard.placeShip(shipCoordinates.row, shipCoordinates.col, ship);
+    console.log(userGameboard.table);
   }
+  
   userCells.forEach((cell) => {
     cell.addEventListener("mouseenter", displayShipShadow);
     cell.addEventListener("mouseleave", removeShipShadow);

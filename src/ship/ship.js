@@ -2,7 +2,7 @@
 class Ship{
     constructor(_length, _verticalPosition, _name){
         this.length = _length;
-        this.vertical = _verticalPosition;
+        this.vertical = _verticalPosition === "Vertical" ? true : false;
         this.timesHitted = 0;
         this.sunk = false;
         this.coordinates = new Set();
