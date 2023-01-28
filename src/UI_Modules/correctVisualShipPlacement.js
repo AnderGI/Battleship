@@ -2,13 +2,14 @@
 //IT WILL EVALUATE WHETHER THE SHIP IS HORIZONTAL OR VERTICAL
 //IF IT IS CORRECTLY PLACED
 
+
 const visualShipDisplay = (cellIndex, obj) => {
   /**
    * Take into account the starting index of the ship and while the start and the end are both in the same
    * row or col its going to be a true positioning else it will be false
    */
-  const userCells = [...document.querySelectorAll("div.userGbCell")];
   let correctShipPositioning = false;
+  const userCells = [...document.querySelectorAll("div.userGbCell")];
   const verticalCombinations = [
     [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
     [1, 11, 21, 31, 41, 51, 61, 71, 81, 91],
@@ -35,12 +36,11 @@ const visualShipDisplay = (cellIndex, obj) => {
       (80 <= cellIndex && cellIndex + obj.length - 1 <= 89) ||
       (90 <= cellIndex && cellIndex + obj.length - 1 <= 99)
     ) {
-      if (
-        !userCells[cellIndex].classList.contains("placedShip") && 
-        !userCells[cellIndex + obj.length - 1].classList.contains("placedShip")
-      ){
-        correctShipPositioning = true;
-      } 
+        if(!userCells[cellIndex].classList.contains("placedShip") && 
+        !userCells[cellIndex + obj.length - 1].classList.contains("placedShip")){
+          correctShipPositioning = true;
+        }
+        
     }
   }
 
@@ -53,9 +53,11 @@ const visualShipDisplay = (cellIndex, obj) => {
      * if every cell the ship will occupy has an index of not -1
      * (it exists) in some combination then return true;
      */
+                            //every combination possible
     correctShipPositioning = verticalCombinations.some((combination) => {
+            //current ship
       return verticalOccupiedCells.every(cell => {
-        return combination.indexOf(cell) !== -1;
+          return combination.indexOf(cell) !== -1;
       })
     });
   }

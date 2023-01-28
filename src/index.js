@@ -41,6 +41,7 @@ import "./styles.css";
     const ship = new Ship(obj.length, obj.alignement, obj.name);
     const shipCoordinates = getShipCoordinates(userCells.indexOf(cell));
     userGameboard.placeShip(shipCoordinates.row + 1, shipCoordinates.col, ship);
+
     /**
      * Ship is correctly positioned both int the gameboard and it also has
      * in his set the gamebioard coordinates
@@ -48,11 +49,7 @@ import "./styles.css";
      * and make them be indexes of the div section (from 0 to 99)
      * */
     const nodeListIndexesArray = fromSetToNodeListIndexes(ship.coordinates);
-    console.log(userGameboard.table);
-    console.log(nodeListIndexesArray);
-    //console.log(userCells.indexOf(cell));
     nodeListIndexesArray.forEach(index => userCells[index].classList.add("placedShip"))
-    nodeListIndexesArray.forEach(index => console.log(userCells[index]))
   }
   
   userCells.forEach((cell) => {

@@ -30,7 +30,7 @@ const removeShipShadow = (e) => {
 
       if (obj.alignement === "Vertical") {
         for (let i = 0; i < obj.length * 10; i += 10) {
-          if (cellIndex + i <= 100) {
+          if (cellIndex + i <= 99) {
             userCells[cellIndex + i].classList.remove("ship");
           }
 
