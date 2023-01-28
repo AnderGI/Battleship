@@ -1,3 +1,7 @@
+//NO CHANGES NEEDED
+//IT WILL EVALUATE WHETHER THE SHIP IS HORIZONTAL OR VERTICAL
+//IF IT IS CORRECTLY PLACED
+
 const visualShipDisplay = (cellIndex, obj) => {
   /**
    * Take into account the starting index of the ship and while the start and the end are both in the same

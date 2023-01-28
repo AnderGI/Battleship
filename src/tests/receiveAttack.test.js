@@ -32,19 +32,19 @@ test('Correct coordinates and hit', () => {
 test('New gameboard layout with ships, hits and missed shots', () => {
     const game2 = new Gameboard();
 
-    const carrier = new Ship(5, false, "Carrier");
+    const carrier = new Ship(5, "Horizontal", "Carrier");
     game2.placeShip(4,2,carrier);
 
-    const battleship = new Ship(4, true, "Battleship");
+    const battleship = new Ship(4, "Vertical", "Battleship");
     game2.placeShip(2,8,battleship);
 
-    const destroyer = new Ship(3, false, "Destroyer");
+    const destroyer = new Ship(3, "Horizonatal", "Destroyer");
     game2.placeShip(7,5,destroyer);
 
-    const submarine = new Ship(3, true, "Submarine");
+    const submarine = new Ship(3, "Vertical", "Submarine");
     game2.placeShip(5,10,submarine);
 
-    const patrolBoat = new Ship(2, false, "Patrol Boat");
+    const patrolBoat = new Ship(2, "Horizontal", "Patrol Boat");
     game2.placeShip(1,3,patrolBoat);
 
     //the begining and end of each ship
@@ -65,7 +65,7 @@ test('New gameboard layout with ships, hits and missed shots', () => {
     expect(game2.table[0][3]).toBe("P");
 
     //boat that tries to fill occupied space
-    const badShip = new Ship(5, false, "Not good Ship");
+    const badShip = new Ship(5, "Horizontal", "Not good Ship");
     game2.placeShip(3, 5, badShip);
 
     expect(game2.table[2][4]).not.toBe("N");

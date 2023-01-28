@@ -1,3 +1,5 @@
+//NO CHANGES NEEDED
+
 const positionBtn = document.querySelector("button.positionBtn");
 const alignementArray = ["Vertical", "Horizontal"];
 

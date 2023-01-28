@@ -1,3 +1,4 @@
+//NO CHANGES NEEDED
 const shipValuesNameLength = (elementTextContent) => {
     let shipNameAndLength = null;
     switch(elementTextContent){

@@ -1,3 +1,4 @@
+//NO CHANGES NEEDED
 //relate name with its length
 const ships = {
   Cruise: 5,

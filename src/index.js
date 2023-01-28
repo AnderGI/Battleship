@@ -30,6 +30,7 @@ import "./styles.css";
   const shipValuesAlignement = require("./UI_Modules/shipValuesAlignement");
   
   const getShipCoordinates = require("./UI_Modules/getShipCoordinates");
+  const fromSetToNodeListIndexes = require("./UI_Modules/fromSetIndexesToSectionDivIndexes");
   const displayShip = (e) => {
     const cell = e.target;
     const shipBtnText = shipNameBtn.textContent;
@@ -39,8 +40,19 @@ import "./styles.css";
     const obj = { ...objNameAndLenght, ...objAlignement };
     const ship = new Ship(obj.length, obj.alignement, obj.name);
     const shipCoordinates = getShipCoordinates(userCells.indexOf(cell));
-    userGameboard.placeShip(shipCoordinates.row, shipCoordinates.col, ship);
+    userGameboard.placeShip(shipCoordinates.row + 1, shipCoordinates.col, ship);
+    /**
+     * Ship is correctly positioned both int the gameboard and it also has
+     * in his set the gamebioard coordinates
+     * take those coordinates of an array (are strings indeed; set elements)
+     * and make them be indexes of the div section (from 0 to 99)
+     * */
+    const nodeListIndexesArray = fromSetToNodeListIndexes(ship.coordinates);
     console.log(userGameboard.table);
+    console.log(nodeListIndexesArray);
+    console.log(userCells.indexOf(cell));
+
+
   }
   
   userCells.forEach((cell) => {

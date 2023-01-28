@@ -1,3 +1,4 @@
+//NO CHANGES NEEDED
 const shipValuesAlignement = (elementTextContent) => {
     let obj = null;
     switch (elementTextContent){
