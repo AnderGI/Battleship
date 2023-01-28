@@ -97,6 +97,9 @@
     background-color: rgba(0, 0, 0, 0.15);
       border: 1px solid var(--blue);
   }
+  main>section>div.ship{
+    background-color: rgba(0, 0, 0, 0.5);
+  }
   main>section>div:nth-child(10n+10){
    border-right:none;
   }

@@ -22,8 +22,7 @@ const removeShipShadow = (e) => {
       if (obj.alignement === "Horizontal") {
         for (let i = 0; i < obj.length; i++) {
           if(cellIndex + i <= 99){
-            userCells[cellIndex + i].style.cssText =
-            "rgba(0, 0, 0, 0.15)";            
+            userCells[cellIndex + i].classList.remove("ship");         
           }
 
         }
@@ -32,8 +31,7 @@ const removeShipShadow = (e) => {
       if (obj.alignement === "Vertical") {
         for (let i = 0; i < obj.length * 10; i += 10) {
           if (cellIndex + i <= 100) {
-            userCells[cellIndex + i].style.backgroundColor =
-            "rgba(0, 0, 0, 0.15)";
+            userCells[cellIndex + i].classList.remove("ship");
           }
 
         }
