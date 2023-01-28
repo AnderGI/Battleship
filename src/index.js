@@ -25,9 +25,6 @@ import "./styles.css";
   };
   const shipsArray = Object.entries(ships);
 
- /* const displayShipNameInBtn = require("./UI_Modules/displayShipNameInBtn");
-  displayShipNameInBtn();*/
-
   const alignementTextInBtn = require("./UI_Modules/alignementTextInBtn");
   alignementTextInBtn();
 
@@ -52,10 +49,8 @@ import "./styles.css";
       battleBtn.classList.remove("notPrepared");
       shipNameBtn.classList.add("notPrepared");
       positionBtn.classList.add("notPrepared");
-      /*
       userGameboardSection.classList.remove("prepared");
       computerGameboardSection.classList.add("prepared");
-      */
     }else{
       const first = shipsArray.shift();
       const text = first[0];
