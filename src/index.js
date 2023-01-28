@@ -50,9 +50,9 @@ import "./styles.css";
     const nodeListIndexesArray = fromSetToNodeListIndexes(ship.coordinates);
     console.log(userGameboard.table);
     console.log(nodeListIndexesArray);
-    console.log(userCells.indexOf(cell));
-
-
+    //console.log(userCells.indexOf(cell));
+    nodeListIndexesArray.forEach(index => userCells[index].classList.add("placedShip"))
+    nodeListIndexesArray.forEach(index => console.log(userCells[index]))
   }
   
   userCells.forEach((cell) => {

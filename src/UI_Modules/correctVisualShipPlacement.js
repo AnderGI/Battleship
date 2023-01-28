@@ -7,6 +7,7 @@ const visualShipDisplay = (cellIndex, obj) => {
    * Take into account the starting index of the ship and while the start and the end are both in the same
    * row or col its going to be a true positioning else it will be false
    */
+  const userCells = [...document.querySelectorAll("div.userGbCell")];
   let correctShipPositioning = false;
   const verticalCombinations = [
     [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
@@ -34,7 +35,12 @@ const visualShipDisplay = (cellIndex, obj) => {
       (80 <= cellIndex && cellIndex + obj.length - 1 <= 89) ||
       (90 <= cellIndex && cellIndex + obj.length - 1 <= 99)
     ) {
-      correctShipPositioning = true;
+      if (
+        !userCells[cellIndex].classList.contains("placedShip") && 
+        !userCells[cellIndex + obj.length - 1].classList.contains("placedShip")
+      ){
+        correctShipPositioning = true;
+      } 
     }
   }
 
@@ -53,6 +59,8 @@ const visualShipDisplay = (cellIndex, obj) => {
       })
     });
   }
+
+
 
   return correctShipPositioning;
 };

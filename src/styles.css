@@ -97,7 +97,8 @@
     background-color: rgba(0, 0, 0, 0.15);
       border: 1px solid var(--blue);
   }
-  main>section>div.ship{
+  main>section>div.ship, 
+  main>section>div.placedShip{
     background-color: rgba(0, 0, 0, 0.5);
   }
   main>section>div:nth-child(10n+10){

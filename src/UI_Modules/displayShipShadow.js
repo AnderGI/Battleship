@@ -29,8 +29,8 @@ const displayShipShadow = (e) => {
         if (goodPositioning) {
           userCells[cellIndex + i].classList.add("ship");
         } else {
+          //userCells[cellIndex + i].classList.remove("ship")
           cell.style.pointerEvents = "none";
-          userCells[cellIndex + i].classList.remove("ship");
         }
       }
     }
@@ -42,7 +42,7 @@ const displayShipShadow = (e) => {
         } else {
           if (cellIndex + i <= 100) {
             cell.style.pointerEvents = "none";
-            userCells[cellIndex + i].classList.remove("ship");
+            //userCells[cellIndex + i].classList.remove("ship");
           }
         }
       }
