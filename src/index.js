@@ -47,10 +47,11 @@ import "./styles.css";
     if(shipsArray.length === 0) {
       shipNameBtn.textContent = "Ships prepared!";
       battleBtn.classList.remove("notPrepared");
+      battleBtn.classList.add("startBattle");
       shipNameBtn.classList.add("notPrepared");
       positionBtn.classList.add("notPrepared");
       userGameboardSection.classList.remove("prepared");
-      computerGameboardSection.classList.add("prepared");
+      //computerGameboardSection.classList.add("prepared");
     }else{
       const first = shipsArray.shift();
       const text = first[0];
@@ -62,21 +63,23 @@ import "./styles.css";
     const cell = e.target;
     const shipBtnText = shipNameBtn.textContent;
     const positionBtnText = positionBtn.textContent;
-    const objNameAndLenght = shipValuesNameLength(shipBtnText);
-    const objAlignement = shipValuesAlignement(positionBtnText);
-    const obj = { ...objNameAndLenght, ...objAlignement };
-    const ship = new Ship(obj.length, obj.alignement, obj.name);
-    const shipCoordinates = getShipCoordinates(userCells.indexOf(cell));
-    userGameboard.placeShip(shipCoordinates.row + 1, shipCoordinates.col, ship);
-
-    /**
-     * Ship is correctly positioned both int the gameboard and it also has
-     * in his set the gamebioard coordinates
-     * take those coordinates of an array (are strings indeed; set elements)
-     * and make them be indexes of the div section (from 0 to 99)
-     * */
-    const nodeListIndexesArray = fromSetToNodeListIndexes(ship.coordinates);
-    nodeListIndexesArray.forEach(index => userCells[index].classList.add("placedShip"));
+    if(shipBtnText !== "Place Ship" && positionBtnText !== "Alignement"){
+      const objNameAndLenght = shipValuesNameLength(shipBtnText);
+      const objAlignement = shipValuesAlignement(positionBtnText);
+      const obj = { ...objNameAndLenght, ...objAlignement };
+      const ship = new Ship(obj.length, obj.alignement, obj.name);
+      const shipCoordinates = getShipCoordinates(userCells.indexOf(cell));
+      userGameboard.placeShip(shipCoordinates.row + 1, shipCoordinates.col, ship);
+  
+      /**
+       * Ship is correctly positioned both int the gameboard and it also has
+       * in his set the gamebioard coordinates
+       * take those coordinates of an array (are strings indeed; set elements)
+       * and make them be indexes of the div section (from 0 to 99)
+       * */
+      const nodeListIndexesArray = fromSetToNodeListIndexes(ship.coordinates);
+      nodeListIndexesArray.forEach(index => userCells[index].classList.add("placedShip"));
+    }
   }
 
   userCells.forEach((cell) => {

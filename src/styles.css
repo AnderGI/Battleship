@@ -145,7 +145,29 @@
     transform: scale(0.75);
   }
   
-  button:hover {
+  button:not(button.startBattle) :hover{
     box-shadow: 0em 0em 0.1em 0.05em var(--smoothWhite2);
   }
+
+  button.startBattle{
+    animation: battleBtn 1s infinite;
+  }
   
+
+  @keyframes battleBtn {
+    0%{
+      box-shadow: 0em 0em 0.1em 0.05em var(--smoothWhite2);
+    }
+    25%{
+      box-shadow: 0em 0em 0.1em 0.05em var(--red);
+    }
+    50%{
+      box-shadow: 0em 0em 0.1em 0.05em var(--smoothWhite2);
+    }
+    75%{
+      box-shadow: 0em 0em 0.1em 0.05em var(--red);
+    }
+    100%{
+      box-shadow: 0em 0em 0.1em 0.05em var(--smoothWhite2);
+    }
+  }
