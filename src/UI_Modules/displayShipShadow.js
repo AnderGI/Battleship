@@ -24,6 +24,9 @@ const displayShipShadow = (e) => {
     const cellIndex = userCells.indexOf(cell);
     const visualShipPlacement = require("./correctVisualShipPlacement");
     let goodPositioning = visualShipPlacement(cellIndex, obj);
+    for(const cell of userCells){
+      cell.style.pointerEvents = null;
+    }
     if (obj.alignement === "Horizontal") {
       for (let i = 0; i < obj.length; i++) {
         if (goodPositioning) {

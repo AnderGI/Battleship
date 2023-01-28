@@ -9,12 +9,23 @@ const ships = {
 };
 const shipNameBtn = document.querySelector("button.shipName");
 const shipsArray = Object.entries(ships);
+
 const displayShipNameInBtn = () => {
   shipNameBtn.addEventListener("click", () => {
-    const first = shipsArray.shift();
-    const text = first[0];
-    shipNameBtn.textContent = text;
-    shipsArray.push(first);
+    if(shipsArray.length === 0) {
+      shipNameBtn.textContent = "Ships prepared!";
+      /*
+      battleBtn.classList.remove("notPrepared");
+      shipNameBtn.classList.add("notPrepared");
+      positionBtn.classList.add("notPrepared");
+      userGameboardSection.classList.remove("prepared");
+      computerGameboardSection.classList.add("prepared");
+      */
+    }else{
+      const first = shipsArray.shift();
+      const text = first[0];
+      shipNameBtn.textContent = text;
+    }
   });
 };
 
