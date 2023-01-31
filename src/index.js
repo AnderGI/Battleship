@@ -14,7 +14,7 @@ import "./styles.css";
   const shipNameBtn = document.querySelector("button.shipName");
 
   const userGameboardSection = document.querySelector("section#userGameboard");
-  const computerGameboardSection = document.querySelector("section#computerGameboard");
+ // const computerGameboardSection = document.querySelector("section#computerGameboard");
 
   const ships = {
     Cruise: 5,
@@ -24,6 +24,9 @@ import "./styles.css";
     "Patrol Boat": 2,
   };
   const shipsArray = Object.entries(ships);
+
+  const fightModal = document.getElementById("modal");
+  const closingModalBtn = document.querySelector("button.modalBtn");
 
   const alignementTextInBtn = require("./UI_Modules/alignementTextInBtn");
   alignementTextInBtn();
@@ -44,26 +47,25 @@ import "./styles.css";
   const fromSetToNodeListIndexes = require("./UI_Modules/fromSetIndexesToSectionDivIndexes");
 
   shipNameBtn.addEventListener("click", () => {
-    if(shipsArray.length === 0) {
-      shipNameBtn.textContent = "Ships prepared!";
-      battleBtn.classList.remove("notPrepared");
-      battleBtn.classList.add("startBattle");
-      shipNameBtn.classList.add("notPrepared");
-      positionBtn.classList.add("notPrepared");
-      userGameboardSection.classList.remove("prepared");
-      //computerGameboardSection.classList.add("prepared");
-    }else{
-      const first = shipsArray.shift();
-      const text = first[0];
-      shipNameBtn.textContent = text;
-    }
+      if(shipsArray.length === 0) {
+        shipNameBtn.textContent = "Ships prepared!";
+        battleBtn.classList.remove("notPrepared");
+        battleBtn.classList.add("startBattle");
+        shipNameBtn.classList.add("notPrepared");
+        positionBtn.classList.add("notPrepared");
+        userGameboardSection.classList.remove("prepared");
+      }else{
+        const first = shipsArray.shift();
+        const text = first[0];
+        shipNameBtn.textContent = text;
+      }
   });
 
   const displayShip = (e) => {
     const cell = e.target;
     const shipBtnText = shipNameBtn.textContent;
     const positionBtnText = positionBtn.textContent;
-    if(shipBtnText !== "Place Ship" && positionBtnText !== "Alignement"){
+    if(shipBtnText !== "Ships" && positionBtnText !== "Alignement"){
       const objNameAndLenght = shipValuesNameLength(shipBtnText);
       const objAlignement = shipValuesAlignement(positionBtnText);
       const obj = { ...objNameAndLenght, ...objAlignement };
@@ -87,5 +89,16 @@ import "./styles.css";
     cell.addEventListener("mouseleave", removeShipShadow);
     cell.addEventListener("click", displayShip)
   });
+
+  const show = () => {
+    fightModal.showModal()
+    battleBtn.classList.remove("startBattle");
+  };
+  const close = () => {
+    fightModal.close()
+  };
+  battleBtn.addEventListener("click", show);
+  closingModalBtn.addEventListener("click", close);
+
 
 })();
