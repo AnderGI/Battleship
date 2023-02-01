@@ -111,13 +111,9 @@ import "./styles.css";
     }
     if(attackResp !== "X" && attackResp !== false && attackResp !== "*"){
       cell.classList.add("hit");
-      console.log("sunk");
-      console.log(attackResp);
     }
   }
-
-
-
+  
   computerCells.forEach( cell => cell.addEventListener("click", attack))
 
 })();
