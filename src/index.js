@@ -109,9 +109,10 @@ import "./styles.css";
     if(attackResp === "X"){
       cell.classList.add("hit");
     }
-    if(attackResp === "Sunk"){
+    if(attackResp !== "X" && attackResp !== false && attackResp !== "*"){
       cell.classList.add("hit");
-      console.log("Sunk");
+      console.log("sunk");
+      console.log(attackResp);
     }
   }
 

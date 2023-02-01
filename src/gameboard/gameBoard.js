@@ -95,7 +95,7 @@ class GameBoard {
           this.table[rowIndex][colIndex] = "X";
           ship.hit();
           ship.isSunk();
-          if(ship.sunk) return "Sunk";
+          if(ship.sunk) return ship;
           return "X";
         }
       }
