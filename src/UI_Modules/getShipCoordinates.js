@@ -38,7 +38,7 @@ const getShipCoordinates = (index) => {
     }
 
     return {
-        row, 
+        row:  (row + 1),
         col : (col + 1)
     }
     

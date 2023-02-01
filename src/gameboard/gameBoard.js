@@ -92,8 +92,8 @@ class GameBoard {
       //in that case ship has been hitted
       for(const ship of this.ships){
         if(ship.coordinates.has(`${rowIndex}, ${colIndex}`)){
-          ship.hit();
           this.table[rowIndex][colIndex] = "X";
+          ship.hit();
           ship.isSunk();
           if(ship.sunk) return "Sunk";
           return "X";

@@ -21,11 +21,8 @@ class Player {
             row = Math.floor(Math.random() * 9);
             col = Math.floor(Math.random() * 9);
 
-            if(
-                !this.computerMoves.has(`${row}, ${col}`)
-            ){
                 this.computerMoves.add(`${row}, ${col}`)
-            }
+        
         }
         return [row, col]
     }

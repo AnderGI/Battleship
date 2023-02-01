@@ -4,6 +4,7 @@ import "./styles.css";
 (function () {
   const Ship = require("./ship/ship");
   const Gameboard = require("./gameboard/gameBoard");
+  const Player = require("./Player/Player");
   const userSection = document.querySelector("section#userGameboard");
   const computerSection = document.querySelector("section#computerGameboard");
   const userGameboard = new Gameboard();
@@ -14,7 +15,7 @@ import "./styles.css";
   const shipNameBtn = document.querySelector("button.shipName");
 
   const userGameboardSection = document.querySelector("section#userGameboard");
- // const computerGameboardSection = document.querySelector("section#computerGameboard");
+  const computerGameboardSection = document.querySelector("section#computerGameboard");
 
   const ships = {
     Cruise: 5,
@@ -36,6 +37,7 @@ import "./styles.css";
   displayGameboards(computerGameboard.table, computerSection, "computerGbCell");
 
   const userCells = [...document.querySelectorAll("div.userGbCell")];
+  const computerCells = [...document.querySelectorAll("div.computerGbCell")]
 
   const displayShipShadow = require("./UI_Modules/displayShipShadow");
   const removeShipShadow = require("./UI_Modules/removeShipShadow");
@@ -71,14 +73,12 @@ import "./styles.css";
       const obj = { ...objNameAndLenght, ...objAlignement };
       const ship = new Ship(obj.length, obj.alignement, obj.name);
       const shipCoordinates = getShipCoordinates(userCells.indexOf(cell));
-      userGameboard.placeShip(shipCoordinates.row + 1, shipCoordinates.col, ship);
-  
-      /**
-       * Ship is correctly positioned both int the gameboard and it also has
-       * in his set the gamebioard coordinates
-       * take those coordinates of an array (are strings indeed; set elements)
-       * and make them be indexes of the div section (from 0 to 99)
-       * */
+      userGameboard.placeShip(shipCoordinates.row, shipCoordinates.col, ship);
+
+      //JUST FOR "TESTING" THE USERS ACTION IN THE GAMEBOARD
+
+      computerGameboard.placeShip(shipCoordinates.row, shipCoordinates.col, ship);
+      /**------------------------------------------------------------------- */
       const nodeListIndexesArray = fromSetToNodeListIndexes(ship.coordinates);
       nodeListIndexesArray.forEach(index => userCells[index].classList.add("placedShip"));
     }
@@ -96,9 +96,27 @@ import "./styles.css";
   };
   const close = () => {
     fightModal.close()
+    computerGameboardSection.classList.add("prepared");
   };
   battleBtn.addEventListener("click", show);
   closingModalBtn.addEventListener("click", close);
 
+  const attack = (e) => {
+    const cell = e.target;
+    const coordinates = getShipCoordinates(computerCells.indexOf(cell));
+    const {row, col} = coordinates;
+    const attackResp = computerGameboard.receiveAttack(row, col);
+    if(attackResp === "X"){
+      cell.classList.add("hit");
+    }
+    if(attackResp === "Sunk"){
+      cell.classList.add("hit");
+      console.log("Sunk");
+    }
+  }
+
+
+
+  computerCells.forEach( cell => cell.addEventListener("click", attack))
 
 })();
