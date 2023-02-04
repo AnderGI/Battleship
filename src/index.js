@@ -48,6 +48,7 @@ import "./styles.css";
   const getShipCoordinates = require("./UI_Modules/getShipCoordinates");
   const fromSetToNodeListIndexes = require("./UI_Modules/fromSetIndexesToSectionDivIndexes");
 
+  const footerSection = document.querySelector("footer>section");
   shipNameBtn.addEventListener("click", () => {
       if(shipsArray.length === 0) {
         shipNameBtn.textContent = "Ships prepared!";
@@ -97,6 +98,10 @@ import "./styles.css";
   const close = () => {
     fightModal.close()
     computerGameboardSection.classList.add("prepared");
+    footerSection.classList.add("visible");
+    shipNameBtn.classList.add("notVisible");
+    positionBtn.classList.add("notVisible");
+    
   };
   battleBtn.addEventListener("click", show);
   closingModalBtn.addEventListener("click", close);
@@ -107,13 +112,22 @@ import "./styles.css";
     const {row, col} = coordinates;
     const attackResp = computerGameboard.receiveAttack(row, col);
     if(attackResp === "X"){
+      //hits
       cell.classList.add("hit");
+      footerSection.textContent = "Ship hitted";
+      
     }
-    if(attackResp !== "X" && attackResp !== false && attackResp !== "*"){
+    else if(attackResp !== "X" && attackResp !== false && attackResp !== "*"){
+      //sunked
       cell.classList.add("hit");
+      footerSection.textContent = "Ship sunked";
+    }
+    
+    else{
+      footerSection.textContent = "Missed";
     }
   }
-  
+
   computerCells.forEach( cell => cell.addEventListener("click", attack))
 
 })();

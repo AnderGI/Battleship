@@ -163,16 +163,20 @@ footer {
 }
 
 footer > section{
+  display: none;
   position: absolute;
   content: '';
   width: 70%;
   height: 95%;
   transform: translateX(-20%);
-  text-align:left;
-  padding: 0.75em 0.5em;
+  text-align:center;
+  vertical-align:middle;
   background-color: rgba(255, 255, 255);
   font: normal small-caps 700 2em monospace;
   border-radius: 10px;
+}
+footer > section.visible{
+  display: block;
 }
 
 button {
@@ -203,6 +207,10 @@ button:not(button.startBattle) :hover {
 
 button.startBattle {
   animation: battleBtn 1s infinite;
+}
+
+button.notVisible{
+  display: none;
 }
 
 @keyframes battleBtn {
