@@ -47,6 +47,7 @@ import "./styles.css";
   
   const getShipCoordinates = require("./UI_Modules/getShipCoordinates");
   const fromSetToNodeListIndexes = require("./UI_Modules/fromSetIndexesToSectionDivIndexes");
+  const getShipFromUICoords = require("./UI_Modules/getShipFromUICoords");
 
   const footerSection = document.querySelector("footer>section");
   shipNameBtn.addEventListener("click", () => {
@@ -111,16 +112,21 @@ import "./styles.css";
     const coordinates = getShipCoordinates(computerCells.indexOf(cell));
     const {row, col} = coordinates;
     const attackResp = computerGameboard.receiveAttack(row, col);
+    const ship = getShipFromUICoords(row - 1, col - 1, computerGameboard);
     if(attackResp === "X"){
       //hits
       cell.classList.add("hit");
       footerSection.textContent = "Ship hitted";
-      
     }
     else if(attackResp !== "X" && attackResp !== false && attackResp !== "*"){
       //sunked
       cell.classList.add("hit");
-      footerSection.textContent = "Ship sunked";
+      //If all ships in computerGameboard have been sunk
+      if(computerGameboard.ships.every(ship => ship.sunk === true)){
+        footerSection.textContent = `${ship.name} and all ships have been sunk!`;
+      }else{
+        footerSection.textContent = `${ship.name} has been sunk!`;
+      }
     }
     
     else{
