@@ -17,14 +17,14 @@ import "./styles.css";
   const userGameboardSection = document.querySelector("section#userGameboard");
   const computerGameboardSection = document.querySelector("section#computerGameboard");
 
-  const ships = {
+  let ships = {
     Cruise: 5,
     Battleship: 4,
     Submarine: 3,
     Destroyer: 3,
     "Patrol Boat": 2,
   };
-  const shipsArray = Object.entries(ships);
+  let shipsArray = Object.entries(ships);
 
   const fightModal = document.getElementById("modal");
   const closingModalBtn = document.querySelector("button.modalBtn");
@@ -48,6 +48,7 @@ import "./styles.css";
   const getShipCoordinates = require("./UI_Modules/getShipCoordinates");
   const fromSetToNodeListIndexes = require("./UI_Modules/fromSetIndexesToSectionDivIndexes");
   const getShipFromUICoords = require("./UI_Modules/getShipFromUICoords");
+
 
   const footerSection = document.querySelector("footer>section");
   shipNameBtn.addEventListener("click", () => {
@@ -107,33 +108,70 @@ import "./styles.css";
   battleBtn.addEventListener("click", show);
   closingModalBtn.addEventListener("click", close);
 
-  const attack = (e) => {
+
+  const displayWinningMessage = () => {
+    const winningDialog = document.querySelector("dialog#winningDialog");
+    const winningDialogBtn = document.querySelector("dialog#winningDialog>button"); 
+    winningDialog.showModal();
+    winningDialogBtn.addEventListener("click", () => {
+      computerGameboard.reset();
+      userGameboard.reset();
+      userCells.forEach(cell => cell.classList.remove("placedShip"));
+      computerCells.forEach(cell => cell.classList.remove("missed", "used", "hit"))
+      userGameboardSection.classList.add("prepared");
+      computerGameboardSection.classList.remove("prepared");
+
+      footerSection.classList.remove("visible");
+
+      shipNameBtn.classList.remove("notVisible");
+      shipNameBtn.classList.remove("notPrepared");
+      shipNameBtn.textContent = "Ships";
+      positionBtn.classList.remove("notVisible");
+      positionBtn.classList.remove("notPrepared");
+      positionBtn.textContent = "Alignement";
+      battleBtn.classList.add("notPrepared");
+
+      ships = {
+        Cruise: 5,
+        Battleship: 4,
+        Submarine: 3,
+        Destroyer: 3,
+        "Patrol Boat": 2,
+      };
+      shipsArray = Object.entries(ships);
+      winningDialog.close();
+    })
+  }
+
+  const handleUserClick = (e) => {
     const cell = e.target;
     const coordinates = getShipCoordinates(computerCells.indexOf(cell));
     const {row, col} = coordinates;
     const attackResp = computerGameboard.receiveAttack(row, col);
     const ship = getShipFromUICoords(row - 1, col - 1, computerGameboard);
+    //DISPLAY HITS AND MISSED HITS
+    //FOR ONE AND/OR ALL SHIPS
     if(attackResp === "X"){
       //hits
       cell.classList.add("hit");
-      footerSection.textContent = "Ship hitted";
-    }
-    else if(attackResp !== "X" && attackResp !== false && attackResp !== "*"){
-      //sunked
-      cell.classList.add("hit");
-      //If all ships in computerGameboard have been sunk
+      footerSection.textContent = `${ship.name} hitted!`;
+      if(ship.sunk){
+        footerSection.textContent = `${ship.name} has been sunk!`;
+      }
       if(computerGameboard.ships.every(ship => ship.sunk === true)){
         footerSection.textContent = `${ship.name} and all ships have been sunk!`;
-      }else{
-        footerSection.textContent = `${ship.name} has been sunk!`;
+        displayWinningMessage();
       }
     }
     
-    else{
+    if(attackResp === "*"){
       footerSection.textContent = "Missed";
+      cell.classList.add("missed");
     }
+
+    cell.classList.add("used");
   }
 
-  computerCells.forEach( cell => cell.addEventListener("click", attack))
+  computerCells.forEach( cell => cell.addEventListener("click", handleUserClick))
 
 })();

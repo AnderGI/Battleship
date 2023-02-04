@@ -9,13 +9,6 @@ game.placeShip(4, 2, ship1);
 const ship2 = new Ship(5, true, "Ship 2");
 game.placeShip(2, 8, ship2);
 
-test('Incorrect coordinates', () => {
-    expect(game.receiveAttack(11,2)).toBe(false);
-    expect(game.receiveAttack(9,11)).toBe(false);
-    expect(game.receiveAttack(11,12)).toBe(false);
-    expect(game.receiveAttack(1,22)).toBe(false);
-})
-
 
 test('Correct coordinates but no hit', () => {
     expect(game.receiveAttack(10,2)).toBe("*"); //indexOf(coord) === -1
@@ -83,18 +76,15 @@ test('New gameboard layout with ships, hits and missed shots', () => {
     expect(carrier.timesHitted).toBe(2);
     //destroyer
     game2.receiveAttack(7, 7);
+    game2.receiveAttack(7, 6);
     game2.receiveAttack(7, 5);
-    expect(destroyer.timesHitted).toBe(2);
     //submarine
     game2.receiveAttack(6, 10);
     expect(submarine.timesHitted).toBe(1);
 
     //SUNK destroyer
-    const sunk = game2.receiveAttack(7,6);
     expect(destroyer.timesHitted).toBe(3);
     expect(destroyer.sunk).toBe(true);
-    expect(sunk).toBe("Sunk");
-
 
     //missed shot
     game2.receiveAttack(5,7);

@@ -85,7 +85,8 @@ main {
 
 /*MODAL*/
 
-dialog#modal {
+dialog#modal,
+dialog#winningDialog {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -94,9 +95,11 @@ dialog#modal {
   height: 30%;
   background-color: rgba(0, 0, 0, 0.5);
   border: none !important;
+ 
 }
 
-dialog#modal::backdrop {
+dialog#modal::backdrop,
+dialog#winningDialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -120,6 +123,12 @@ main > section > div {
   background-color: rgba(0, 0, 0, 0.15);
   border: 1px solid var(--blue);
   position: relative;
+}
+main > section > div.used{
+  pointer-events: none;
+}
+main > section > div.missed{
+  background-color:#AEE8F5;
 }
 main > section > div.hit::after {
   content: "";
@@ -231,7 +240,8 @@ button.notVisible{
   }
 }
 
-dialog#modal > button {
+dialog#modal > button,
+dialog#winningDialog > button {
   font-size: 3em;
   background-color: rgba(0, 0, 0, 0);
   color: var(--smoothWhite2);

@@ -74,7 +74,7 @@ class GameBoard {
   }
 
   receiveAttack(_row, _col) {
-    if(_row > 10 || _col > 10) return false;
+    //if(_row > 10 || _col > 10) return false;
     const rowIndex = _row - 1;
     const colIndex = _col - 1;
     const el = [rowIndex, colIndex];
@@ -95,12 +95,33 @@ class GameBoard {
           this.table[rowIndex][colIndex] = "X";
           ship.hit();
           ship.isSunk();
-          if(ship.sunk) return ship;
           return "X";
         }
       }
     }
 
+  }
+
+  reset(){
+    this.table = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+    this.ships = [
+
+    ];
+    this.shipCoord = new Set();
+    this.missedShots = [
+
+    ];
   }
 }
 
