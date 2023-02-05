@@ -54,6 +54,7 @@ import "./styles.css";
 
 
   const footerSection = document.querySelector("footer>section");
+
   shipNameBtn.addEventListener("click", () => {
       if(shipsArray.length === 0) {
         shipNameBtn.textContent = "Ships prepared!";
@@ -80,15 +81,39 @@ import "./styles.css";
       const ship = new Ship(obj.length, obj.alignement, obj.name);
       const shipCoordinates = getShipCoordinates(userCells.indexOf(cell));
       userGameboard.placeShip(shipCoordinates.row, shipCoordinates.col, ship);
-
-      //JUST FOR "TESTING" THE USERS ACTION IN THE GAMEBOARD
-
-      //computerGameboard.placeShip(shipCoordinates.row, shipCoordinates.col, ship);
-      /**------------------------------------------------------------------- */
       const nodeListIndexesArray = fromSetToNodeListIndexes(ship.coordinates);
       nodeListIndexesArray.forEach(index => userCells[index].classList.add("placedShip"));
     }
   }
+
+  const placeComputerShipsRandomly = () => {
+    //coordenadas validas random
+    //mientras placeships devuelva false seguir con coordenadas random
+    //ships vnames and alignement
+    let moves;
+    const shipNames = ["Cruise", "Battleship", "Destroyer", "Submarine", "Patrol Boat"];
+    const shipsAlignement = ["Vertical", "Horizontal"];
+    let nameIndex = 0;
+    let nameLengthObj;
+    let alignementIndex;
+    let alignementObj;
+    let currentGameboardShipsLenght = computerGameboard.ships.length; //0
+    while(computerGameboard.ships.length !== 5){
+      moves = Player.randomValidMove();
+      nameLengthObj = shipValuesNameLength(shipNames[nameIndex]);
+      alignementIndex = Math.floor(Math.random() * 2);
+      alignementObj = shipValuesAlignement(shipsAlignement[alignementIndex]);
+      const obj = {...nameLengthObj, ...alignementObj};
+      const ship = new Ship(obj.length, obj.alignement, obj.name);
+      computerGameboard.placeShip(moves[0] + 1, moves[1] + 1, ship);    
+      if(currentGameboardShipsLenght < computerGameboard.ships.length){
+        nameIndex++;
+        currentGameboardShipsLenght++;
+      }  
+  }
+  }
+
+  placeComputerShipsRandomly();
 
   userCells.forEach((cell) => {
     cell.addEventListener("mouseenter", displayShipShadow);
@@ -142,9 +167,12 @@ import "./styles.css";
         "Patrol Boat": 2,
       };
       shipsArray = Object.entries(ships);
+
+      placeComputerShipsRandomly();
       winningDialog.close();
     })
   }
+
 
   const handleUserClick = (e) => {
     const cell = e.target;
@@ -175,37 +203,10 @@ import "./styles.css";
     cell.classList.add("used");
   }
 
+  computerCells.forEach(cell => {
+    cell.addEventListener("click", handleUserClick)
+  })
 
-    const placeComputerShipsRandomly = () => {
-      //coordenadas validas random
-      //mientras placeships devuelva false seguir con coordenadas random
-      //ships vnames and alignement
-      let moves;
-      const shipNames = ["Cruise", "Battleship", "Destroyer", "Submarine", "Patrol Boat"];
-      const shipsAlignement = ["Vertical", "Horizontal"];
-      let nameIndex = 0;
-      let nameLengthObj;
-      let alignementIndex;
-      let alignementObj;
-      let currentGameboardShipsLenght = computerGameboard.ships.length; //0
-      while(computerGameboard.ships.length !== 5){
-        moves = Player.randomValidMove();
-        nameLengthObj = shipValuesNameLength(shipNames[nameIndex]);
-        alignementIndex = Math.floor(Math.random() * 2);
-        alignementObj = shipValuesAlignement(shipsAlignement[alignementIndex]);
-        const obj = {...nameLengthObj, ...alignementObj};
-        const ship = new Ship(obj.length, obj.alignement, obj.name);
-        computerGameboard.placeShip(moves[0] + 1, moves[1] + 1, ship);    
-        if(currentGameboardShipsLenght < computerGameboard.ships.length){
-          nameIndex++;
-          currentGameboardShipsLenght++;
-        }  
-    }
 
-      console.log(computerGameboard.table);
-      console.log(computerGameboard.ships);
-    }
-
-    placeComputerShipsRandomly();
 
 })();
