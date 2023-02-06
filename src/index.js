@@ -187,45 +187,28 @@ import "./styles.css";
 
 
   const computerMoves = () => {
-    const moves = Player.randomValidMove();
-    const [ row, col ] = moves;
-    //const attackResp = userGameboard.receiveAttack(row, col);
-    //const ship = getShipFromUICoords(row + 1, col + 1, userGameboard);
-    const cellIndex = getCellIndexFromArray(row, col);
-    const cell = userCells[cellIndex];
-   if(cell.classList.contains("placedShip")){
-    cell.classList.add("hit");
-    userGameboard.receiveAttack(row + 1, col + 1);
-    console.log(userGameboard.table);
-   }else{
-    cell.classList.add("missed");
-   }
-    //DISPLAY HITS AND MISSED HITS
-    //FOR ONE AND/OR ALL SHIPS
-    /*
-    if (attackResp === "X") {
-      //hits
+    let shipHitted = true;
+    let moves;
+    let cell;
+    while(shipHitted){
+      moves = Player.randomValidMove();
+      const [ row, col ] = moves;
+      //const attackResp = userGameboard.receiveAttack(row, col);
+      //const ship = getShipFromUICoords(row + 1, col + 1, userGameboard);
+      const cellIndex = getCellIndexFromArray(row, col);
+      cell = userCells[cellIndex];
+     if(cell.classList.contains("placedShip")){
       cell.classList.add("hit");
-      footerSection.textContent = `Computer ${ship.name} hitted!`;
-      if (ship.sunk) {
-        footerSection.textContent = `Computer ${ship.name} has been sunk!`;
-      }
-      if (computerGameboard.ships.every((ship) => ship.sunk === true)) {
-        footerSection.textContent = `Computer ${ship.name} and all ships have been sunk!`;
-        playerTurn = false;
-        displayWinningMessage();
-      }
-    }
-    //MISSED
-    if (attackResp === "*") {
-      footerSection.textContent = "Missed";
+      userGameboard.receiveAttack(row + 1, col + 1);
+      console.log("Hit");
+     }else{
       cell.classList.add("missed");
-      //WHNE MISSSED COMPUTER MAKES MOVE
-      setTimeout(console.log("Comp turn!"), 3000);
+      shipHitted = false;
+     }
     }
-    //EVERY CELL THAT HAS BEEN HITTED OR MISSED SHOULD NOT BE USED AGAIN
-    cell.classList.add("used");
-  */
+
+   //it is not available anymore
+   cell.classList.add("used");
  }
 
 
