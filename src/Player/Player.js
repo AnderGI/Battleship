@@ -2,16 +2,6 @@ class Player {
     static playerTurn = true;
     static computerMoves = new Set();
 
-    static makeMove(x,y){
-        if(this.playerTurn){
-            this.playerTurn = !this.playerTurn;
-            return [x,y];
-        }else{
-            this.playerTurn = !this.playerTurn; 
-            return this.randomValidMove()
-        }
-    }
-
     static randomValidMove(){
         let row;
         let col;
