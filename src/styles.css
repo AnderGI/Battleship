@@ -115,6 +115,9 @@ main > section.prepared {
   transform: scale(1);
 }
 
+main > section.notPrepared {
+  pointer-events: none;
+}
 main > section > div.ship,
 main > section > div.placedShip {
   background-color: rgba(0, 0, 0, 0.5);
