@@ -158,6 +158,11 @@ import "./styles.css";
       computerCells.forEach((cell) =>
         cell.classList.remove("missed", "used", "hit")
       );
+      userCells.forEach((cell) =>
+        cell.classList.remove("missed", "used", "hit")
+      );
+      
+      userGameboardSection.classList.remove("notPrepared");
       userGameboardSection.classList.add("prepared");
       computerGameboardSection.classList.remove("prepared");
 
@@ -185,32 +190,40 @@ import "./styles.css";
     });
   };
 
-
+  /**PROBLE COMES WITH TIMMING OF COMOPUTER MOVES AND THE COMPUTER SHOULD ALSO HAVE THE LOGIC OF
+   * MAKING THE NEXT BEST MOVE
+   */
   const computerMoves = () => {
     let shipHitted = true;
     let moves;
     let cell;
-    while(shipHitted){
+    while (shipHitted) {
       moves = Player.randomValidMove();
-      const [ row, col ] = moves;
+      const [row, col] = moves;
+      /**POSSIBLE SHIP INFO */
       //const attackResp = userGameboard.receiveAttack(row, col);
       //const ship = getShipFromUICoords(row + 1, col + 1, userGameboard);
       const cellIndex = getCellIndexFromArray(row, col);
       cell = userCells[cellIndex];
-     if(cell.classList.contains("placedShip")){
-      cell.classList.add("hit");
-      userGameboard.receiveAttack(row + 1, col + 1);
-      console.log("Hit");
-     }else{
-      cell.classList.add("missed");
-      shipHitted = false;
-     }
+      if (cell.classList.contains("placedShip")) {
+        cell.classList.add("hit");
+        userGameboard.receiveAttack(row + 1, col + 1);
+       // footerSection.textContent = `Computer hitted!`;
+        if (userGameboard.ships.every((ship) => ship.sunk === true)) {
+          footerSection.textContent = `A computer has sunk all your ships idiot! Shame on you!`;
+          playerWins = false;
+          displayWinningMessage();
+        }
+      } else {
+        cell.classList.add("missed");
+        shipHitted = false;
+        //footerSection.textContent = `Computer missed!`;
+      }
     }
 
-   //it is not available anymore
-   cell.classList.add("used");
- }
-
+    //it is not available anymore
+    cell.classList.add("used");
+  };
 
   const handleUserClick = (e) => {
     const cell = e.target;
@@ -246,7 +259,5 @@ import "./styles.css";
   computerCells.forEach((cell) => {
     cell.addEventListener("click", handleUserClick);
   });
-  console.log(
-    computerGameboard.table
-  );
+  console.log(computerGameboard.table);
 })();
