@@ -1,1 +1,2 @@
 # Battleship
+The main of this project has been to build a Battleship game. This has been the first project related with TDD, which has been an OK approximation by making my own mocks. Having been programming for the last 7 months the aim has not been (even thought is a purpose) to implement an efficient AI. The game is quite randomly boring. My purpose has been to start getting used to modules, to TDD, to more advanced DOM concepts and to TRYING to prevent class dependency (which I think I have not completely achieved).
