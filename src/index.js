@@ -200,16 +200,14 @@ import "./styles.css";
     while (shipHitted) {
       moves = Player.randomValidMove();
       const [row, col] = moves;
-      const ship = getShipFromUICoords(row + 1, col + 1, userGameboard);
+      /**POSSIBLE SHIP INFO */
+      //const attackResp = userGameboard.receiveAttack(row, col);
+      //const ship = getShipFromUICoords(row + 1, col + 1, userGameboard);
       const cellIndex = getCellIndexFromArray(row, col);
       cell = userCells[cellIndex];
       if (cell.classList.contains("placedShip")) {
         cell.classList.add("hit");
         userGameboard.receiveAttack(row + 1, col + 1);
-        footerSection.textContent = `Computer hitted a ship!`;
-        if(ship.sunk){
-          footerSection.textContent = `${ship.name} has been sunk!`
-        }
         if (userGameboard.ships.every((ship) => ship.sunk === true)) {
           footerSection.textContent = `A computer has sunk all your ships idiot! Shame on you!`;
           playerWins = false;
@@ -218,7 +216,6 @@ import "./styles.css";
       } else {
         cell.classList.add("missed");
         shipHitted = false;
-        footerSection.textContent = `Computer missed!`;
       }
     }
 
@@ -237,7 +234,7 @@ import "./styles.css";
     if (attackResp === "X") {
       //hits
       cell.classList.add("hit");
-      footerSection.textContent = `Ship hitted!`;
+      footerSection.textContent = `${ship.name} hitted!`;
       if (ship.sunk) {
         footerSection.textContent = `${ship.name} has been sunk!`;
       }
