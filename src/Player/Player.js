@@ -1,7 +1,6 @@
 class Player {
-    static playerTurn = true;
     static computerMoves = new Set();
-
+    static hits = [];
     static randomValidMove(){
         let row;
         let col;
@@ -15,6 +14,15 @@ class Player {
         
         }
         return [row, col]
+    }
+    static addMoveToHit(_row,_col){
+        this.hits.push([_row, _col]);
+    }
+
+    static triangulateShip(){
+        //everytime with a randomvalid move a ship is hitted that move
+        //is added to hits
+        //it should calculate all the moves 
     }
 }
 
